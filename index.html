@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Autonomous AI Business System — Discovery Survey</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #181a24;
+    --surface2: #1f2232;
+    --border: #2a2d3e;
+    --text: #e4e4e7;
+    --text-dim: #8b8d9e;
+    --accent: #4f8fff;
+    --accent-glow: rgba(79, 143, 255, 0.15);
+    --green: #34d399;
+    --orange: #fb923c;
+    --red: #f87171;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem;
+    font-weight: 400;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .header p {
+    color: var(--text-dim);
+    font-size: 1rem;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 24px;
+    transition: border-color 0.3s;
+  }
+
+  .section:hover {
+    border-color: rgba(79, 143, 255, 0.3);
+  }
+
+  .section-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: var(--accent-glow);
+    color: var(--accent);
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .section h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    margin-bottom: 4px;
+  }
+
+  .section-desc {
+    color: var(--text-dim);
+    font-size: 0.88rem;
+    margin-bottom: 24px;
+  }
+
+  .field {
+    margin-bottom: 20px;
+  }
+
+  .field:last-child {
+    margin-bottom: 0;
+  }
+
+  label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.92rem;
+    margin-bottom: 6px;
+  }
+
+  label .hint {
+    font-weight: 400;
+    color: var(--text-dim);
+    font-size: 0.82rem;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="url"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+  }
+
+  textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%238b8d9e' viewBox='0 0 16 16'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+    cursor: pointer;
+  }
+
+  select option {
+    background: var(--surface2);
+    color: var(--text);
+  }
+
+  .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .checkbox-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+  }
+
+  .checkbox-item input[type="checkbox"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface2);
+    cursor: pointer;
+    margin-top: 2px;
+    transition: all 0.2s;
+  }
+
+  .checkbox-item input[type="checkbox"]:checked {
+    background: var(--accent);
+    border-color: var(--accent);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M13.485 3.929L6.5 10.914 3.015 7.429l1.06-1.06L6.5 8.793l5.925-5.924 1.06 1.06z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .checkbox-item span {
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  .other-input {
+    margin-top: 8px;
+    margin-left: 30px;
+    display: none;
+  }
+
+  .other-input.visible {
+    display: block;
+  }
+
+  .submit-section {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .submit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 48px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .submit-btn:hover {
+    background: #3d7ae8;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(79, 143, 255, 0.25);
+  }
+
+  .submit-note {
+    color: var(--text-dim);
+    font-size: 0.82rem;
+    margin-top: 12px;
+  }
+
+  /* Success state */
+  .success-message {
+    display: none;
+    text-align: center;
+    padding: 60px 32px;
+    background: var(--surface);
+    border: 1px solid var(--green);
+    border-radius: 16px;
+  }
+
+  .success-message.visible {
+    display: block;
+  }
+
+  .success-message h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    color: var(--green);
+    margin-bottom: 12px;
+  }
+
+  .success-message p {
+    color: var(--text-dim);
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .output-block {
+    display: none;
+    margin-top: 32px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: left;
+    white-space: pre-wrap;
+    font-family: 'DM Mono', 'SF Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--text);
+    max-height: 500px;
+    overflow-y: auto;
+  }
+
+  .output-block.visible {
+    display: block;
+  }
+
+  .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 16px;
+    padding: 10px 24px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .copy-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  @media (max-width: 600px) {
+    .container { padding: 24px 16px 60px; }
+    .header h1 { font-size: 1.7rem; }
+    .section { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>Autonomous AI Business System</h1>
+    <p>Tell me about your business so I can build you a 24/7 AI development team that works while you sleep.</p>
+  </div>
+
+  <form id="survey">
+
+    <!-- Section 1: About You -->
+    <div class="section">
+      <div class="section-number">1</div>
+      <h2>About You</h2>
+      <p class="section-desc">Basic info so I know who I'm building for.</p>
+
+      <div class="field">
+        <label>Your name</label>
+        <input type="text" name="name" required>
+      </div>
+
+      <div class="field">
+        <label>Email</label>
+        <input type="email" name="email" required>
+      </div>
+
+      <div class="field">
+        <label>Business name</label>
+        <input type="text" name="business_name" required>
+      </div>
+
+      <div class="field">
+        <label>What does your business do? <span class="hint">Plain English, one or two sentences.</span></label>
+        <textarea name="business_description" required></textarea>
+      </div>
+    </div>
+
+    <!-- Section 2: The Problem -->
+    <div class="section">
+      <div class="section-number">2</div>
+      <h2>The Problem</h2>
+      <p class="section-desc">What's eating your time and energy that AI could handle?</p>
+
+      <div class="field">
+        <label>What are the top 3 things you spend the most time on that you wish you didn't have to?</label>
+        <textarea name="time_wasters" required></textarea>
+      </div>
+
+      <div class="field">
+        <label>What keeps breaking or falling through the cracks?</label>
+        <textarea name="pain_points"></textarea>
+      </div>
+
+      <div class="field">
+        <label>If you could wake up and have ONE thing magically done every morning, what would it be?</label>
+        <textarea name="magic_wish" required></textarea>
+      </div>
+    </div>
+
+    <!-- Section 3: Your Tech -->
+    <div class="section">
+      <div class="section-number">3</div>
+      <h2>Your Technology</h2>
+      <p class="section-desc">What tools and systems are already in play?</p>
+
+      <div class="field">
+        <label>Do you have an existing codebase or software product?</label>
+        <select name="has_codebase" required>
+          <option value="" disabled selected>Select one</option>
+          <option value="yes_github">Yes — it's on GitHub</option>
+          <option value="yes_other">Yes — hosted elsewhere</option>
+          <option value="no_code">No — no custom code, just off-the-shelf tools</option>
+          <option value="no_but_want">No — but I want to build something</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>If yes, what's it built with? <span class="hint">Languages, frameworks, platforms — whatever you know.</span></label>
+        <input type="text" name="tech_stack" placeholder="e.g., Python, React, Node.js, Shopify, WordPress...">
+      </div>
+
+      <div class="field">
+        <label>What tools/platforms do you use daily? <span class="hint">Check all that apply.</span></label>
+        <div class="checkbox-group">
+          <label class="checkbox-item"><input type="checkbox" name="tools" value="github"> <span>GitHub</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="tools" value="slack"> <span>Slack</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="tools" value="notion"> <span>Notion</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="tools" value="trello"> <span>Trello / project management</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="tools" value="shopify"> <span>Shopify / e-commerce</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="tools" value="crm"> <span>CRM (HubSpot, Salesforce, etc.)</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="tools" value="google_workspace"> <span>Google Workspace</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="tools" value="quickbooks"> <span>QuickBooks / accounting</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="tools" value="social_media"> <span>Social media management</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="tools" value="tradingview"> <span>TradingView / trading platforms</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="tools" value="other_tool" id="otherToolCheck"> <span>Other</span></label>
+        </div>
+        <input type="text" name="tools_other" class="other-input" id="otherToolInput" placeholder="What else do you use?">
+      </div>
+
+      <div class="field">
+        <label>Do you have a dedicated computer you could leave running 24/7? <span class="hint">Mac or Linux preferred.</span></label>
+        <select name="dedicated_machine" required>
+          <option value="" disabled selected>Select one</option>
+          <option value="mac_yes">Yes — a Mac</option>
+          <option value="linux_yes">Yes — a Linux machine</option>
+          <option value="windows_yes">Yes — a Windows machine</option>
+          <option value="can_buy">No, but I can buy one</option>
+          <option value="cloud">I'd prefer a cloud server</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Section 4: Goals -->
+    <div class="section">
+      <div class="section-number">4</div>
+      <h2>Goals</h2>
+      <p class="section-desc">What does success look like?</p>
+
+      <div class="field">
+        <label>What are the top 3 goals for your business in the next 90 days?</label>
+        <textarea name="goals_90_day" required></textarea>
+      </div>
+
+      <div class="field">
+        <label>Where do you want to be in 1 year?</label>
+        <textarea name="goals_1_year"></textarea>
+      </div>
+
+      <div class="field">
+        <label>What does the AI system need to do to be worth it for you? <span class="hint">What result would make you say "this was the best investment I've made"?</span></label>
+        <textarea name="success_criteria" required></textarea>
+      </div>
+    </div>
+
+    <!-- Section 5: How You Work -->
+    <div class="section">
+      <div class="section-number">5</div>
+      <h2>How You Work</h2>
+      <p class="section-desc">So the system fits your life, not the other way around.</p>
+
+      <div class="field">
+        <label>Is this a solo operation or do you have a team?</label>
+        <select name="team_size" required>
+          <option value="" disabled selected>Select one</option>
+          <option value="solo">Just me</option>
+          <option value="partner">Me + a business partner</option>
+          <option value="small_team">Small team (2-5 people)</option>
+          <option value="larger_team">Larger team (5+)</option>
+          <option value="contractors">Me + contractors/freelancers</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>How technical are you? <span class="hint">Be honest — this helps me build it right for you.</span></label>
+        <select name="technical_level" required>
+          <option value="" disabled selected>Select one</option>
+          <option value="non_technical">Not technical — I use apps but don't code</option>
+          <option value="somewhat">Somewhat — I can follow instructions and Google things</option>
+          <option value="comfortable">Comfortable — I've done some coding or scripting</option>
+          <option value="developer">Developer — I write code regularly</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>How do you prefer to communicate? <span class="hint">How should the AI system reach you?</span></label>
+        <div class="checkbox-group">
+          <label class="checkbox-item"><input type="checkbox" name="comms" value="telegram"> <span>Telegram</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="comms" value="slack"> <span>Slack</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="comms" value="email"> <span>Email</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="comms" value="text"> <span>Text / SMS</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="comms" value="dashboard"> <span>Just a dashboard I can check</span></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>What's your monthly budget for AI tools? <span class="hint">Includes Claude subscription + any API costs.</span></label>
+        <select name="budget" required>
+          <option value="" disabled selected>Select one</option>
+          <option value="under_50">Under $50/month</option>
+          <option value="50_100">$50–$100/month</option>
+          <option value="100_200">$100–$200/month</option>
+          <option value="200_500">$200–$500/month</option>
+          <option value="over_500">$500+/month — whatever it takes</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Section 6: Sensitive Stuff -->
+    <div class="section">
+      <div class="section-number">6</div>
+      <h2>Safety & Sensitivity</h2>
+      <p class="section-desc">What does the AI need to be extra careful about?</p>
+
+      <div class="field">
+        <label>Does your business handle other people's money, data, or trust? <span class="hint">Subscribers, clients, patients, customers with accounts, etc.</span></label>
+        <textarea name="handles_others_money" required placeholder="e.g., 'Yes — I manage investment portfolios for 20 clients' or 'No — it's just my own stuff'"></textarea>
+      </div>
+
+      <div class="field">
+        <label>What should the AI NEVER do without asking you first?</label>
+        <textarea name="never_without_asking" placeholder="e.g., 'Never change anything that affects client billing', 'Never post to social media without my approval'"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Any compliance, regulatory, or legal requirements? <span class="hint">HIPAA, SEC, PCI, etc.</span></label>
+        <textarea name="compliance" placeholder="e.g., 'We handle health data — HIPAA compliant required' or 'None that I know of'"></textarea>
+      </div>
+    </div>
+
+    <!-- Section 7: Anything Else -->
+    <div class="section">
+      <div class="section-number">7</div>
+      <h2>Anything Else</h2>
+      <p class="section-desc">Whatever's on your mind that I should know.</p>
+
+      <div class="field">
+        <label>Anything else you want to tell me about your business, your goals, or what you need?</label>
+        <textarea name="anything_else" placeholder="Go for it — the more context the better."></textarea>
+      </div>
+    </div>
+
+    <div class="submit-section">
+      <button type="submit" class="submit-btn">Generate Summary</button>
+      <p class="submit-note">This creates a formatted summary you can copy and send.</p>
+    </div>
+  </form>
+
+  <div class="success-message" id="successMessage">
+    <h2>Done ✓</h2>
+    <p>Here's the formatted summary. Copy it and send it over.</p>
+    <div class="output-block" id="outputBlock"></div>
+    <button class="copy-btn" id="copyBtn">📋 Copy to Clipboard</button>
+  </div>
+</div>
+
+<script>
+  // Toggle other tools input
+  document.getElementById('otherToolCheck').addEventListener('change', function() {
+    document.getElementById('otherToolInput').classList.toggle('visible', this.checked);
+  });
+
+  // Form submission
+  document.getElementById('survey').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const fd = new FormData(this);
+
+    const tools = fd.getAll('tools');
+    const comms = fd.getAll('comms');
+
+    const summary = `# Autonomous AI System — Discovery Summary
+## Generated: ${new Date().toLocaleDateString()}
+
+---
+
+## 1. About the Business
+- **Name:** ${fd.get('name')}
+- **Email:** ${fd.get('email')}
+- **Business:** ${fd.get('business_name')}
+- **Description:** ${fd.get('business_description')}
+
+## 2. Pain Points
+- **Time wasters:** ${fd.get('time_wasters')}
+- **What breaks/falls through cracks:** ${fd.get('pain_points') || 'Not specified'}
+- **Magic wish (one thing done every morning):** ${fd.get('magic_wish')}
+
+## 3. Technology
+- **Existing codebase:** ${fd.get('has_codebase')}
+- **Tech stack:** ${fd.get('tech_stack') || 'Not specified'}
+- **Daily tools:** ${tools.join(', ')}${fd.get('tools_other') ? ', ' + fd.get('tools_other') : ''}
+- **Dedicated machine:** ${fd.get('dedicated_machine')}
+
+## 4. Goals
+- **90-day goals:** ${fd.get('goals_90_day')}
+- **1-year vision:** ${fd.get('goals_1_year') || 'Not specified'}
+- **Success = worth it when:** ${fd.get('success_criteria')}
+
+## 5. Work Style
+- **Team size:** ${fd.get('team_size')}
+- **Technical level:** ${fd.get('technical_level')}
+- **Preferred comms:** ${comms.join(', ')}
+- **Monthly budget:** ${fd.get('budget')}
+
+## 6. Safety & Sensitivity
+- **Handles others' money/data/trust:** ${fd.get('handles_others_money')}
+- **Never do without asking:** ${fd.get('never_without_asking') || 'Not specified'}
+- **Compliance requirements:** ${fd.get('compliance') || 'None specified'}
+
+## 7. Additional Context
+${fd.get('anything_else') || 'None provided'}
+`;
+
+    document.getElementById('survey').style.display = 'none';
+    const successEl = document.getElementById('successMessage');
+    successEl.classList.add('visible');
+    const outputEl = document.getElementById('outputBlock');
+    outputEl.textContent = summary;
+    outputEl.classList.add('visible');
+
+    document.getElementById('copyBtn').addEventListener('click', function() {
+      navigator.clipboard.writeText(summary).then(() => {
+        this.textContent = '✓ Copied!';
+        setTimeout(() => { this.textContent = '📋 Copy to Clipboard'; }, 2000);
+      });
+    });
+
+    window.scrollTo({ top: successEl.offsetTop - 40, behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>
